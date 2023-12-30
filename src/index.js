@@ -1,12 +1,25 @@
 import getImages from './utils/images-api';
 import createCard from './utils/card-template';
 
-// console.log(getImages('black cat'));
+getImages('cat')
+  .then(response => {
+    const gallery = document.querySelector('.gallery');
 
-const gallery = document.querySelector('.gallery');
+    const imageCard = createCard({ ...response.data.hits[0] });
 
-const imageCard = createCard('https://web.net', 'qawsedrf', 12, 34, 56, 78);
+    gallery.insertAdjacentHTML('afterbegin', imageCard);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 
-gallery.insertAdjacentHTML('afterbegin', imageCard);
+const options = {
+  webformatURL: 'https://web.net',
+  tags: 'qawsedrf',
+  likes: 12,
+  views: 34,
+  comments: 56,
+  downloads: 78,
+};
 
 console.log();
