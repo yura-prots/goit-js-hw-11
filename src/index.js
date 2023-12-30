@@ -1,3 +1,3 @@
-import { fetchImages, onFetchError } from './utils/images-api';
+import { getImages } from './utils/images-api';
 
-console.log(fetchImages());
+// console.log(getImages());
