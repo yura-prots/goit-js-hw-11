@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '41545079-e9b3a4168a776ff0916b92321';
 
-export async function getImages(userQuery) {
+async function getImages(userQuery) {
   const options = {
     method: 'get',
     baseURL: BASE_URL,
@@ -27,3 +27,5 @@ export async function getImages(userQuery) {
     console.log(error);
   }
 }
+
+export default getImages;
