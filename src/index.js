@@ -1,5 +1,8 @@
-import getImages from './utils/images-api';
-import createCard from './utils/card-template';
+import { getImages } from './utils/images-api';
+import { createCard } from './utils/card-template';
+import { refs } from './utils/refs';
+
+const { searchForm, searchBtn, gallery } = refs;
 
 async function createGallery(query) {
   try {
@@ -12,19 +15,4 @@ async function createGallery(query) {
   }
 }
 
-createGallery('cat');
-
-// getImages('cat')
-//   .then(response => {
-//     const gallery = document.querySelector('.gallery');
-//     const imagesArr = response.data.hits;
-
-//     imagesArr.forEach(image => {
-//       const imageCard = createCard(image);
-
-//       gallery.insertAdjacentHTML('afterbegin', imageCard);
-//     });
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
+// createGallery('cat');
