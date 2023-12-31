@@ -1,12 +1,10 @@
 import { refs } from '../utils/refs';
 
-const { gallery } = refs;
-
-export function createMarkup(images) {
+function createMarkup(images) {
   images.forEach(image => {
     const imageCard = createCard(image);
 
-    gallery.insertAdjacentHTML('afterbegin', imageCard);
+    refs.gallery.insertAdjacentHTML('afterbegin', imageCard);
   });
 }
 
@@ -31,3 +29,5 @@ function createCard({ webformatURL, tags, likes, views, comments, downloads }) {
         </div>
     `;
 }
+
+export default createMarkup;
