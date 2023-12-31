@@ -31,7 +31,9 @@ async function createGallery(userQuery) {
 
     createMarkup(imagesArr);
 
-    Notiflix.Notify.success(`Hooray! We found ${response.data.total} images.`);
+    Notiflix.Notify.success(
+      `Hooray! We found ${response.data.totalHits} images.`
+    );
   } catch (error) {
     console.log(error);
 
