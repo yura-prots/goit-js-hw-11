@@ -1,18 +1,15 @@
 import { getImages } from './utils/images-api';
-import { createCard } from './utils/card-template';
-import { refs } from './utils/refs';
-
-const { searchForm, searchBtn, gallery } = refs;
+import { createMarkup } from './utils/card-template';
 
 async function createGallery(query) {
   try {
     const response = await getImages(query);
-    console.log(response);
+    const imagesArr = response.data.hits;
 
-    return response;
+    createMarkup(imagesArr);
   } catch (error) {
     console.log(error);
   }
 }
 
-// createGallery('cat');
+createGallery('dog');

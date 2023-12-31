@@ -1,11 +1,16 @@
-export function createCard({
-  webformatURL,
-  tags,
-  likes,
-  views,
-  comments,
-  downloads,
-}) {
+import { refs } from '../utils/refs';
+
+const { gallery } = refs;
+
+export function createMarkup(images) {
+  images.forEach(image => {
+    const imageCard = createCard(image);
+
+    gallery.insertAdjacentHTML('afterbegin', imageCard);
+  });
+}
+
+function createCard({ webformatURL, tags, likes, views, comments, downloads }) {
   return `
         <div class="photo-card">
             <img src="${webformatURL}" alt="${tags}" loading="lazy" />
