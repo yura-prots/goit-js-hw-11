@@ -1,4 +1,11 @@
-function createCard({ webformatURL, tags, likes, views, comments, downloads }) {
+export function createCard({
+  webformatURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads,
+}) {
   return `
         <div class="photo-card">
             <img src="${webformatURL}" alt="${tags}" loading="lazy" />
@@ -19,5 +26,3 @@ function createCard({ webformatURL, tags, likes, views, comments, downloads }) {
         </div>
     `;
 }
-
-export default createCard;
