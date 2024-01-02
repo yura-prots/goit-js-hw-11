@@ -1,8 +1,12 @@
 import Notiflix from 'notiflix';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import { refs } from './utils/refs';
 import { getImages } from './utils/images-api';
 import createMarkup from './utils/card-template';
+
+const gallery = new SimpleLightbox('.gallery a');
 
 refs.searchForm.addEventListener('submit', onFormSubmit);
 
