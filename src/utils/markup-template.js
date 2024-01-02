@@ -42,11 +42,7 @@ function createMarkup(images) {
 
   refs.gallery.insertAdjacentHTML('afterbegin', markupStr);
 
-  new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionPosition: 'bottom',
-    captionDelay: 250,
-  });
+  new SimpleLightbox('.gallery a');
 }
 
 export default createMarkup;

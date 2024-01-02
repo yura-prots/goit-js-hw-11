@@ -1,0 +1,34 @@
+body {
+  padding: 5px;
+}
+
+.gallery {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-auto-rows: minmax(100px, 250px);
+  gap: 5px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  border-radius: 4px;
+
+  box-shadow: -1px 5px 31px 10px rgba(143, 137, 143, 0.98);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
