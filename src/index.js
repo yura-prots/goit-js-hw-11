@@ -16,8 +16,6 @@ function onFormSubmit(e) {
   const request = e.target.elements.searchQuery.value;
 
   createGallery(request);
-
-  refs.searchForm.reset();
 }
 
 async function createGallery(userQuery) {
