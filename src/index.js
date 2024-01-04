@@ -6,21 +6,20 @@ refs.searchForm.addEventListener('submit', onFormSubmit);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 let searchQuery = '';
+let pageToShow = null;
 
 function onFormSubmit(e) {
   e.preventDefault();
+
+  pageToShow = 1;
 
   searchQuery = e.target.elements.searchQuery.value;
 
   createGallery(searchQuery);
 }
 
-async function onLoadMore() {
-  try {
-    const response = await getImages(searchQuery);
+function onLoadMore() {
+  pageToShow += 1;
 
-    console.log(response);
-  } catch (error) {
-    console.log(error);
-  }
+  createGallery(searchQuery, pageToShow);
 }

@@ -1,9 +1,4 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 import refs from './refs';
-
-const lightbox = new SimpleLightbox('.gallery a');
 
 function createMarkup(images) {
   const markupStr = images
@@ -43,8 +38,6 @@ function createMarkup(images) {
     .join('');
 
   refs.gallery.insertAdjacentHTML('afterbegin', markupStr);
-
-  lightbox.refresh();
 }
 
 export default createMarkup;
