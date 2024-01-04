@@ -42,7 +42,7 @@ function createMarkup(images) {
     )
     .join('');
 
-  refs.gallery.insertAdjacentHTML('afterbegin', markupStr);
+  refs.gallery.insertAdjacentHTML('beforeend', markupStr);
 
   lightbox.refresh();
 }
