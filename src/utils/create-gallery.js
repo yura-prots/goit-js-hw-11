@@ -1,13 +1,9 @@
 import Notiflix from 'notiflix';
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import getImages from '../utils/images-api';
 import createMarkup from '../utils/markup-template';
 
 async function createGallery(userQuery, page) {
-  const lightbox = new SimpleLightbox('.gallery a');
-
   try {
     const response = await getImages(userQuery, page);
     const imagesArr = response.data.hits;
@@ -21,7 +17,6 @@ async function createGallery(userQuery, page) {
     }
 
     createMarkup(imagesArr);
-    lightbox.refresh();
 
     Notiflix.Notify.success(`Hooray! We found ${response.data.total} images.`);
   } catch (error) {

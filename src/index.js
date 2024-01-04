@@ -15,7 +15,7 @@ function onFormSubmit(e) {
 
   searchQuery = e.target.elements.searchQuery.value;
 
-  createGallery(searchQuery);
+  createGallery(searchQuery, pageToShow);
 }
 
 function onLoadMore() {
