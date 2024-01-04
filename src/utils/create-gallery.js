@@ -16,9 +16,11 @@ async function createGallery(userQuery, page) {
       return;
     }
 
-    createMarkup(imagesArr);
+    Notiflix.Notify.success(
+      `Hooray! We found ${response.data.totalHits} images.`
+    );
 
-    Notiflix.Notify.success(`Hooray! We found ${response.data.total} images.`);
+    return createMarkup(imagesArr);
   } catch (error) {
     console.log(error);
 
