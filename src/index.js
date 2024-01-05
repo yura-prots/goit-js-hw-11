@@ -16,8 +16,12 @@ async function onFormSubmit(e) {
   e.preventDefault();
   resetGallery();
 
+  refs.searchBtn.style.display = 'none';
+
   searchQuery = e.target.elements.searchQuery.value;
   if (searchQuery === '') {
+    refs.searchBtn.style.display = 'block';
+
     Notiflix.Notify.info('Give me some query to search.');
 
     return;
@@ -27,6 +31,8 @@ async function onFormSubmit(e) {
     const response = await getImages(searchQuery, pageToShow, perPage);
 
     if (response.data.hits.length === 0) {
+      refs.searchBtn.style.display = 'block';
+
       Notiflix.Notify.info(
         'Sorry, there are no images matching your search query. Please try again.'
       );
@@ -49,7 +55,29 @@ async function onFormSubmit(e) {
 }
 
 async function onLoadMore() {
+  searchQuery = refs.searchForm.elements.searchQuery.value;
   pageToShow += 1;
+
+  try {
+    const response = await getImages(searchQuery, pageToShow, perPage);
+
+    if (response.data.hits.length === 0) {
+      refs.searchBtn.style.display = 'block';
+      refs.loadMoreBtn.style.display = 'none';
+
+      Notiflix.Notify.info(
+        "We're sorry, but you've reached the end of search results."
+      );
+
+      return;
+    }
+
+    createMarkup(response.data.hits);
+  } catch (error) {
+    console.log(error);
+
+    Notiflix.Notify.failure('Ooops, something went wrong!');
+  }
 }
 
 function resetGallery() {
