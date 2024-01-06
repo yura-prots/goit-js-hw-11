@@ -14,15 +14,13 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 refs.loadMoreBtn.classList.add('is-hidden');
 
 let searchQuery = '';
-let pageToShow = 1;
+let pageToShow = null;
 let perPage = 40;
 let lastPage = null;
 
 async function onFormSubmit(e) {
   e.preventDefault();
   resetGallery();
-
-  refs.searchBtn.classList.add('is-hidden');
 
   searchQuery = e.target.elements.searchQuery.value;
   if (searchQuery === '') {
@@ -95,6 +93,7 @@ function onInputChange() {
 
 function resetGallery() {
   refs.gallery.innerHTML = '';
+  refs.searchBtn.classList.add('is-hidden');
   refs.loadMoreBtn.classList.add('is-hidden');
   pageToShow = 1;
 }
