@@ -9,8 +9,9 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 refs.loadMoreBtn.style.display = 'none';
 
 let searchQuery = '';
-let pageToShow = null;
-let perPage = 3;
+let pageToShow = 1;
+let perPage = 40;
+let lastPage = null;
 
 async function onFormSubmit(e) {
   e.preventDefault();
@@ -40,13 +41,16 @@ async function onFormSubmit(e) {
       return;
     }
 
+    createMarkup(response.data.hits);
+
+    lastPage = Math.ceil(response.data.totalHits / perPage);
+    console.log(lastPage);
+
+    refs.loadMoreBtn.style.display = 'block';
+
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.totalHits} images.`
     );
-
-    createMarkup(response.data.hits);
-
-    refs.loadMoreBtn.style.display = 'block';
   } catch (error) {
     console.log(error);
 
@@ -55,22 +59,21 @@ async function onFormSubmit(e) {
 }
 
 async function onLoadMore() {
-  searchQuery = refs.searchForm.elements.searchQuery.value;
+  if (pageToShow === lastPage) {
+    refs.loadMoreBtn.style.display = 'none';
+
+    Notiflix.Notify.info(
+      "We're sorry, but you've reached the end of search results."
+    );
+
+    return;
+  }
+
   pageToShow += 1;
+  searchQuery = refs.searchForm.elements.searchQuery.value;
 
   try {
     const response = await getImages(searchQuery, pageToShow, perPage);
-
-    if (response.data.hits.length === 0) {
-      refs.searchBtn.style.display = 'block';
-      refs.loadMoreBtn.style.display = 'none';
-
-      Notiflix.Notify.info(
-        "We're sorry, but you've reached the end of search results."
-      );
-
-      return;
-    }
 
     createMarkup(response.data.hits);
   } catch (error) {
