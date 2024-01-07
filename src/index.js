@@ -55,7 +55,6 @@ async function onFormSubmit(e) {
     createMarkup(response.data.hits);
     lightbox.refresh();
 
-    refs.searchBtn.removeAttribute('disabled');
     refs.loader.classList.add('is-hidden');
     refs.loadMoreBtn.classList.remove('is-hidden');
 
