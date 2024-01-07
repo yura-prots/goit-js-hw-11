@@ -1,1 +1,41 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+
+.is-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 250ms, cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    box-shadow: -1px 5px 31px 10px rgba(143, 137, 143, 0.98);
+  }
+}
+
+img {
+  display: block;
+  width: 350px;
+  height: 250px;
+  max-width: 100%;
+
+  object-fit: cover;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
