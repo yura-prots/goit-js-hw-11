@@ -11,6 +11,7 @@ const lightbox = new SimpleLightbox('.gallery a');
 refs.searchForm.addEventListener('submit', onFormSubmit);
 refs.searchInput.addEventListener('input', onInputChange);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+
 refs.loadMoreBtn.classList.add('is-hidden');
 refs.loader.classList.add('is-hidden');
 
@@ -53,6 +54,7 @@ async function onFormSubmit(e) {
     }
 
     createMarkup(response.data.hits);
+    smoothScroll();
     lightbox.refresh();
 
     refs.loader.classList.add('is-hidden');
@@ -88,6 +90,7 @@ async function onLoadMore() {
     const response = await getImages(searchQuery, pageToShow, perPage);
 
     createMarkup(response.data.hits);
+    smoothScroll();
     lightbox.refresh();
   } catch (error) {
     console.log(error);
@@ -99,4 +102,15 @@ async function onLoadMore() {
 function onInputChange() {
   refs.searchBtn.removeAttribute('disabled');
   refs.loader.classList.add('is-hidden');
+}
+
+function smoothScroll() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
 }
