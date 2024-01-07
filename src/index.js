@@ -12,19 +12,27 @@ refs.searchForm.addEventListener('submit', onFormSubmit);
 refs.searchInput.addEventListener('input', onInputChange);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 refs.loadMoreBtn.classList.add('is-hidden');
+refs.loader.classList.add('is-hidden');
 
 let searchQuery = '';
 let pageToShow = null;
-let perPage = 40;
 let lastPage = null;
+let perPage = 40;
 
 async function onFormSubmit(e) {
   e.preventDefault();
-  resetGallery();
+
+  refs.gallery.innerHTML = '';
+  refs.loadMoreBtn.classList.add('is-hidden');
+  refs.loader.classList.remove('is-hidden');
+  refs.searchBtn.setAttribute('disabled', '');
+
+  pageToShow = 1;
 
   searchQuery = e.target.elements.searchQuery.value;
   if (searchQuery === '') {
-    refs.searchBtn.classList.remove('is-hidden');
+    refs.searchBtn.removeAttribute('disabled');
+    refs.loader.classList.add('is-hidden');
 
     Notiflix.Notify.info('Give me some query to search.');
 
@@ -35,7 +43,7 @@ async function onFormSubmit(e) {
     const response = await getImages(searchQuery, pageToShow, perPage);
 
     if (response.data.hits.length === 0) {
-      refs.searchBtn.classList.remove('is-hidden');
+      refs.loader.classList.add('is-hidden');
 
       Notiflix.Notify.info(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -47,9 +55,11 @@ async function onFormSubmit(e) {
     createMarkup(response.data.hits);
     lightbox.refresh();
 
-    lastPage = Math.ceil(response.data.totalHits / perPage);
-
+    refs.searchBtn.removeAttribute('disabled');
+    refs.loader.classList.add('is-hidden');
     refs.loadMoreBtn.classList.remove('is-hidden');
+
+    lastPage = Math.ceil(response.data.totalHits / perPage);
 
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.totalHits} images.`
@@ -88,12 +98,6 @@ async function onLoadMore() {
 }
 
 function onInputChange() {
-  refs.searchBtn.classList.remove('is-hidden');
-}
-
-function resetGallery() {
-  refs.gallery.innerHTML = '';
-  refs.searchBtn.classList.add('is-hidden');
-  refs.loadMoreBtn.classList.add('is-hidden');
-  pageToShow = 1;
+  refs.searchBtn.removeAttribute('disabled');
+  refs.loader.classList.add('is-hidden');
 }
